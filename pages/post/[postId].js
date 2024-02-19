@@ -1,3 +1,4 @@
+import { AuthRouteProtect } from "./AuthRouteProtect";
 import React from "react";
 
 const Post = () => {
@@ -5,3 +6,5 @@ const Post = () => {
 };
 
 export default Post;
+
+export const getServerSideProps = AuthRouteProtect;

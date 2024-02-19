@@ -1,3 +1,4 @@
+import { AuthRouteProtect } from "./post/AuthRouteProtect";
 import React from "react";
 
 const TokenTopup = () => {
@@ -5,3 +6,5 @@ const TokenTopup = () => {
 };
 
 export default TokenTopup;
+
+export const getServerSideProps = AuthRouteProtect;
