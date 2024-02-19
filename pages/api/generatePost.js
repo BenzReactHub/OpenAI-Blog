@@ -9,6 +9,10 @@ export default async function handler(req, res) {
   const response = await openai.chat.completions.create({
     messages: [
       {
+        role: "system",
+        content: "You are a blog post generator.",
+      },
+      {
         role: "user",
         content: `Write a long and detailed SEO-friendly blog post about ${topic}, that targets the following comma-separated keywords: ${keywords}.
         The content should be formatted in SEO-friendly HTML.
