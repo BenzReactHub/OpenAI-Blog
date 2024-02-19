@@ -5,8 +5,7 @@ const openai = new OpenAI({
 });
 
 export default async function handler(req, res) {
-  const topic = "Top 10 tips for dog owners";
-  const keywords = "first-time dog owners, common dog health issues, best dob breeds";
+  const { topic, keywords } = req.body;
   const response = await openai.chat.completions.create({
     messages: [
       {
@@ -24,8 +23,10 @@ export default async function handler(req, res) {
     ],
     model: "gpt-3.5-turbo",
     max_tokens: 3000,
-    temperature: 0
+    temperature: 0,
   });
-  console.log(response.choices[0]?.message.content);
-  res.status(200).json({ post: JSON.parse(response.choices[0]?.message.content) });
+  // console.log(response.choices[0]?.message.content);
+  res
+    .status(200)
+    .json({ post: JSON.parse(response.choices[0]?.message.content) });
 }
