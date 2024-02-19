@@ -17,3 +17,12 @@ npx tailwindcss init
 
 ### OpenAI 
 https://platform.openai.com/
+https://www.npmjs.com/package/openai
+```bash
+npm install --save openai
+# or
+yarn add openai
+```
+
+### MongoDB
+https://www.mongodb.com/atlas/database
