@@ -3,10 +3,19 @@ import React from "react";
 import AppLayout from "../../components/AppLayout";
 
 export default function NewPost(props) {
-  console.log(props.test);
+  
+  async function handleClick() {
+    const response = await fetch('/api/generatePost', {
+      method: 'POST'
+    }).then(res => res.json())
+    console.log('post', response)
+  }
   return (
     <div>
       <h1>This is the new post page</h1>
+      <button className="btn" onClick={handleClick}>
+        Generate
+      </button>
     </div>
   );
 }
