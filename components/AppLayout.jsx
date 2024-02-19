@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import Logo from "./Logo";
 
 const AppLayout = ({ children }) => {
   const { user } = useUser();
@@ -11,7 +12,7 @@ const AppLayout = ({ children }) => {
     <div className="grid grid-cols-[300px_1fr] h-screen max-h-screen">
       <div className="flex flex-col text-white overflow-hidden">
         <div className="bg-slate-800 px-2">
-          <div>Logo</div>
+          <Logo/>
           <Link
             href="/post/new"
             className="bg-green-500 tracking-wider w-full text-white text-center font-bols cursor-pointer uppercase px-4 py-2 rounded-md hover:opacity-70 transition-colors duration-200 ease-in-out block"
@@ -19,7 +20,7 @@ const AppLayout = ({ children }) => {
             New Post
           </Link>
           <Link href="/token-topup" className="block mt-2 text-center">
-            <FontAwesomeIcon icon={faCoins} className="text-yellow-500"/>
+            <FontAwesomeIcon icon={faCoins} className="text-yellow-500" />
             <span className="pl-1">0 tokens available</span>
           </Link>
         </div>
