@@ -1,6 +1,6 @@
 import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import React from "react";
-import AppLayout from "../../components/AppLayout/AppLayout";
+import AppLayout from "../../components/AppLayout";
 
 export default function NewPost(props) {
   console.log(props.test);
