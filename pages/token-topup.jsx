@@ -1,4 +1,4 @@
-import { AuthRouteProtect } from "./post/AuthRouteProtect";
+import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import React from "react";
 
 const TokenTopup = () => {
@@ -7,4 +7,8 @@ const TokenTopup = () => {
 
 export default TokenTopup;
 
-export const getServerSideProps = AuthRouteProtect;
+export const getServerSideProps = withPageAuthRequired(() => {
+  return {
+    props: {},
+  };
+});

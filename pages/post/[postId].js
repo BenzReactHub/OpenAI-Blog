@@ -1,4 +1,4 @@
-import { AuthRouteProtect } from "./AuthRouteProtect";
+import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import React from "react";
 
 const Post = () => {
@@ -7,4 +7,8 @@ const Post = () => {
 
 export default Post;
 
-export const getServerSideProps = AuthRouteProtect;
+export const getServerSideProps = withPageAuthRequired(() => {
+  return {
+    props: {},
+  };
+});
