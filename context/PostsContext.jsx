@@ -16,13 +16,13 @@ export const PostsProvider = ({ children }) => {
     });
   }, []);
 
-  const getPosts = useCallback(async ({ lastPostDate }) => {
+  const getPosts = useCallback(async ({ lastPostDate, getNewerPosts = false }) => {
     const result = await fetch(`/api/getPosts`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ lastPostDate }),
+      body: JSON.stringify({ lastPostDate, getNewerPosts }),
     }).then((res) => res.json());
     const postsResult = result.posts || [];
     if(postsResult.length < 5) {
