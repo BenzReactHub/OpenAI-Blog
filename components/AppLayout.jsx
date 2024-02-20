@@ -2,11 +2,13 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import { PiCoinsFill } from "react-icons/pi";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { createContext } from "react";
 import Logo from "./Logo";
 import { useContext, useEffect } from "react";
 import PostsContext from "../context/PostsContext";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { HiOutlineUser } from "react-icons/hi2";
+import { PiArticleMediumBold } from "react-icons/pi";
 
 const AppLayout = ({
   children,
@@ -40,13 +42,27 @@ const AppLayout = ({
         noMorePosts={noMorePosts}
         getPosts={getPosts}
       />
-      <NavBar />
+      <NavBar
+        postId={postId}
+        user={user}
+        posts={posts}
+        availableToken={availableToken}
+        noMorePosts={noMorePosts}
+        getPosts={getPosts}
+      />
       {children}
     </div>
   );
 };
 
-const SideBar = ({ postId, user, posts, availableToken, noMorePosts, getPosts }) => {
+const SideBar = ({
+  postId,
+  user,
+  posts,
+  availableToken,
+  noMorePosts,
+  getPosts,
+}) => {
   return (
     <div className="hidden lg:flex flex-col bg-gradient-b text-white overflow-hidden">
       <div className="px-2">
@@ -57,8 +73,11 @@ const SideBar = ({ postId, user, posts, availableToken, noMorePosts, getPosts })
         >
           New Post
         </Link>
-        <Link href="/token-topup" className="flex my-2 items-center justify-center gap-2 mt-2 text-center">
-          <PiCoinsFill className="text-yellow-500 text-2xl"/>
+        <Link
+          href="/token-topup"
+          className="flex my-2 items-center justify-center gap-2 mt-2 text-center"
+        >
+          <PiCoinsFill className="text-yellow-500 text-2xl" />
           <span className="pl-1">{availableToken} tokens available</span>
         </Link>
       </div>
@@ -98,7 +117,7 @@ const SideBar = ({ postId, user, posts, availableToken, noMorePosts, getPosts })
               />
             </div>
             <div className="flex-1 font-extrabold text-base-200">
-              <div>{user.email}</div>
+              <div>{user?.email}</div>
               <Link
                 className="text-sm hover:no-underline"
                 href="/api/auth/logout"
@@ -115,21 +134,109 @@ const SideBar = ({ postId, user, posts, availableToken, noMorePosts, getPosts })
   );
 };
 
-const NavBar = () => {
+const NavBar = ({
+  posts,
+  postId,
+  user,
+  availableToken,
+  noMorePosts,
+  getPosts,
+}) => {
   return (
     <div className="lg:hidden h-[6rem] flex items-center justify-between px-8 bg-gradient-r">
       <Logo />
-      <div className="">
+      <div className="flex items-center gap-3">
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="text-xl">
-            <GiHamburgerMenu className="text-3xl"/>
+            <PiArticleMediumBold className="text-3xl" />
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content z-[1] w-[10rem] overflow-x-scroll bg-base-100 shadow rounded-box"
+          >
+            {posts.map((post) => (
+              <Link
+                key={post._id}
+                href={`/post/${post._id}`}
+                className={`hover:bg-stone-200 hover:no-underline text-ellipsis overflow-x-hidden m-auto overflow-y-scroll w-[8rem] whitespace-nowrap block p-2 rounded-md ${
+                  post._id === postId ? "bg-stone-200" : ""
+                }`}
+              >
+                {post.topic}
+              </Link>
+            ))}
+            {!noMorePosts && (
+              <div
+                onClick={() => {
+                  getPosts({ lastPostDate: posts[posts.length - 1].created });
+                }}
+                className="hover:underline text-sm text-secondary text-center cursor-pointer mt-4"
+              >
+                Load More Posts
+              </div>
+            )}
+          </ul>
+        </div>
+        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+          <div className="indicator">
+            <Link href="/token-topup">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle"
+              >
+                <div className="indicator">
+                  <PiCoinsFill className="text-yellow-500 text-2xl" />
+                  <span className="badge badge-sm indicator-item">
+                    {availableToken > 100 ? "99+" : availableToken}
+                  </span>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+        <div className="dropdown dropdown-end">
+          <div tabIndex={0} role="button" className="text-xl">
+            <HiOutlineUser className="text-3xl" />
+          </div>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content z-[1] shadow bg-base-100 pr-8 rounded-box overflow-auto flex flex-col items-start px-2"
           >
             <li>
-              <a>Logout</a>
+              <div className="flex">
+                <Image
+                  src={user?.picture}
+                  alt={user?.name}
+                  height={25}
+                  width={25}
+                  className="rounded-full"
+                />
+                <span className="">{user?.email}</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div className="dropdown dropdown-end">
+          <div tabIndex={0} role="button" className="text-xl">
+            <GiHamburgerMenu className="text-3xl" />
+          </div>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content z-[1] shadow bg-base-100 rounded-box w-[8rem]"
+          >
+            <li>
+              <Link href="/post/new" className="btn btn-outline btn-info">
+                New Post
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/api/auth/logout"
+                className="btn btn-outline btn-error"
+              >
+                Logout
+              </Link>
             </li>
           </ul>
         </div>
