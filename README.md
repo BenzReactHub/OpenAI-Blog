@@ -26,3 +26,10 @@ yarn add openai
 
 ### MongoDB
 https://www.mongodb.com/atlas/database
+
+### Strip (金流服務)
+https://stripe.com/
+https://docs.stripe.com/api/checkout/sessions/create
+```bash
+npm i stripe
+```
