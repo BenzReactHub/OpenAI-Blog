@@ -56,7 +56,7 @@ export default withApiAuthRequired(async function handler(req, res) {
     }
   });
   const parsed = JSON.parse(response.choices[0]?.message.content)
-  console.log(parsed)
+  // console.log(parsed)
   const post = await db.collection('posts').insertOne({
     postContent: parsed?.postContent,
     postTitle: parsed?.title,
