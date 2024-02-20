@@ -33,9 +33,9 @@ const AppLayout = ({
   return (
     <div className="grid grid-cols-[300px_1fr] h-screen max-h-screen">
       <div className="flex flex-col text-white overflow-hidden">
-        <div className="bg-slate-800 px-2">
+        <div className="bg-neutral/80 px-2">
           <Logo />
-          <Link href="/post/new" className="btn">
+          <Link href="/post/new" className="btn btn-secondary w-full text-xl hover:no-underline">
             New Post
           </Link>
           <Link href="/token-topup" className="block mt-2 text-center">
@@ -43,16 +43,12 @@ const AppLayout = ({
             <span className="pl-1">{availableToken} tokens available</span>
           </Link>
         </div>
-        <div className="px-4 flex-1 overflow-auto bg-gradient-to-b from-slate-800 to-cyan-600">
+        <div className="px-4 flex-1 flex flex-col gap-1 bg-white/10 overflow-auto bg-gradient-to-b from-neutral/80 to-neutral-content">
           {posts.map((post) => (
             <Link
               key={post._id}
               href={`/post/${post._id}`}
-              className={`py-1 border block text-ellipsis overflow-hidden whitespace-nowrap my-1 px-2 bg-white/10 cursor-pointer rounded-sm ${
-                postId === post._id
-                  ? "bg-white/40 border-white"
-                  : "border-white/0"
-              }`}
+              className={`py-1 text-ellipsis overflow-hidden whitespace-nowrap block hover:bg-white/40 hover:no-underline p-2 rounded-md ${postId === post._id ? "bg-white/40" : "border-white/0"}`}
             >
               {post.topic}
             </Link>
@@ -62,13 +58,13 @@ const AppLayout = ({
               onClick={() => {
                 getPosts({ lastPostDate: posts[posts.length - 1].created });
               }}
-              className="hover:underline text-sm text-slate-400 text-center cursor-pointer mt-4"
+              className="hover:underline text-sm text-base-200 text-center cursor-pointer mt-4"
             >
               Load More Posts
             </div>
           )}
         </div>
-        <div className="bg-cyan-600 flex items-center gap-2 border-t border-t-white h-20 px-2">
+        <div className="bg-neutral-content flex items-center gap-2 border-t border-t-white h-20 px-2">
           {user ? (
             <>
               <div className="min-w-[50px]">
@@ -80,9 +76,9 @@ const AppLayout = ({
                   className="rounded-full"
                 />
               </div>
-              <div className="flex-1 font-extrabold">
+              <div className="flex-1 font-extrabold text-stone-600">
                 <div>{user.email}</div>
-                <Link className="text-sm" href="/api/auth/logout">
+                <Link className="text-sm hover:no-underline" href="/api/auth/logout">
                   Logout
                 </Link>
               </div>

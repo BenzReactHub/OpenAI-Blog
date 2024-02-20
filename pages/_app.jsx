@@ -23,6 +23,7 @@ function MyApp({ Component, pageProps }) {
     <UserProvider>
       <PostsProvider>
         <main
+          data-theme="fantasy"
           className={`${dmSans.variable} ${dmSerifDisplay.variable} font-body`}
         >
           {getLayout(<Component {...pageProps} />, pageProps)}

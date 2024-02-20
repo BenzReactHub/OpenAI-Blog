@@ -11,9 +11,9 @@ export default function TokenTopup() {
     window.location.href = result.session.url;
   }
   return (
-    <div className="max-w-screen-lg m-auto">
+    <div className="max-w-screen-lg m-auto bg-neutral-content/80 p-8 rounded-md">
       <h1>This is the token topup</h1>
-      <button className="btn" onClick={handleClick}>
+      <button className="btn btn-secondary w-full text-xl" onClick={handleClick}>
         Add Tokens
       </button>
     </div>
