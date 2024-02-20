@@ -74,7 +74,7 @@ export default function NewPost(props) {
             </div>
             <button
               type="submit"
-              className="btn btn-success w-full text-xl text-white"
+              className="btn btn-secondary w-full text-xl text-white"
               disabled={!topic.trim() || !keywords.trim()}
             >
               Generate
