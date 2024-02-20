@@ -30,6 +30,9 @@ https://www.mongodb.com/atlas/database
 ### Strip (金流服務)
 https://stripe.com/
 https://docs.stripe.com/api/checkout/sessions/create
+
+Strip CLI(webhook local testing)
+https://docs.stripe.com/stripe-cli
 ```bash
 npm i stripe
 ```
