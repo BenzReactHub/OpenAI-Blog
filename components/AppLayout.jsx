@@ -1,6 +1,5 @@
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { faCoins } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { PiCoinsFill } from "react-icons/pi";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -57,8 +56,8 @@ const SideBar = ({ postId, user, posts, availableToken, noMorePosts, getPosts })
         >
           New Post
         </Link>
-        <Link href="/token-topup" className="block mt-2 text-center">
-          <FontAwesomeIcon icon={faCoins} className="text-yellow-500" />
+        <Link href="/token-topup" className="flex my-2 items-center justify-center gap-2 mt-2 text-center">
+          <PiCoinsFill className="text-yellow-500 text-2xl"/>
           <span className="pl-1">{availableToken} tokens available</span>
         </Link>
       </div>

@@ -3,8 +3,8 @@ import { useState } from "react";
 import AppLayout from "../../components/AppLayout";
 import { useRouter } from "next/navigation";
 import { getAppProps } from "../../utils/getAppProps";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBrain } from "@fortawesome/free-solid-svg-icons";
+import { FaPenNib } from "react-icons/fa";
+
 export default function NewPost(props) {
   const router = useRouter();
   const [topic, setTopic] = useState("");
@@ -30,9 +30,9 @@ export default function NewPost(props) {
   }
   return (
     <div className="h-full overflow-hidden">
-      {!!generating && (
+      {generating && (
         <div className="text-green-500 flex h-full animate-pulse w-full flex-col justify-center items-center">
-          <FontAwesomeIcon icon={faBrain} className="text-8xl" />
+          <FaPenNib className="text-3xl"/>
           <h6>Generating...</h6>
         </div>
       )}

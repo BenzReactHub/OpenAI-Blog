@@ -1,6 +1,5 @@
 import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
-import { faHashtag } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaSlackHash } from "react-icons/fa";
 import { ObjectId } from "mongodb";
 import { useContext, useState } from "react";
 import AppLayout from "../../components/AppLayout";
@@ -47,9 +46,8 @@ const Post = (props) => {
         </div>
         <div className="flex flex-wrap pt-2 gap-1">
           {props.keywords.split(", ").map((keyword, idx) => (
-            <div key={idx} className="p-2 rounded-full bg-slate-800 text-white">
-              <FontAwesomeIcon icon={faHashtag} />
-              &nbsp;
+            <div key={idx} className="p-2 rounded-full bg-slate-800 text-white flex items-center gap-1 font-bold">
+              <FaSlackHash />
               {keyword}
             </div>
           ))}
