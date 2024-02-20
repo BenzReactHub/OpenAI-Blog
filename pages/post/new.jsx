@@ -3,8 +3,8 @@ import { useState } from "react";
 import AppLayout from "../../components/AppLayout";
 import { useRouter } from "next/navigation";
 import { getAppProps } from "../../utils/getAppProps";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBrain } from "@fortawesome/free-solid-svg-icons";
+import { FaPenNib } from "react-icons/fa";
+
 export default function NewPost(props) {
   const router = useRouter();
   const [topic, setTopic] = useState("");
@@ -29,10 +29,10 @@ export default function NewPost(props) {
     }
   }
   return (
-    <div className="h-full overflow-hidden">
-      {!!generating && (
+    <div className="h-screen lg:h-auto overflow-hidden">
+      {generating && (
         <div className="text-green-500 flex h-full animate-pulse w-full flex-col justify-center items-center">
-          <FontAwesomeIcon icon={faBrain} className="text-8xl" />
+          <FaPenNib className="text-3xl"/>
           <h6>Generating...</h6>
         </div>
       )}
@@ -41,7 +41,7 @@ export default function NewPost(props) {
         <div className="w-full h-full flex flex-col overflow-auto">
           <form
             onSubmit={handleSubmit}
-            className="m-auto w-full max-w-screen-sm bg-slate-100 p-4 rounded-md shadow-xl border border-slate-200 shadow-slate-200"
+            className="m-auto w-[80%] lg:w-[35rem] max-w-screen-sm bg-slate-100 p-4 rounded-md shadow-xl border border-slate-200 shadow-slate-200"
           >
             <div>
               <label>
@@ -74,7 +74,7 @@ export default function NewPost(props) {
             </div>
             <button
               type="submit"
-              className="btn"
+              className="btn btn-secondary w-full text-xl text-white"
               disabled={!topic.trim() || !keywords.trim()}
             >
               Generate

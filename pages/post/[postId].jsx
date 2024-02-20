@@ -1,6 +1,5 @@
 import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
-import { faHashtag } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaSlackHash } from "react-icons/fa";
 import { ObjectId } from "mongodb";
 import { useContext, useState } from "react";
 import AppLayout from "../../components/AppLayout";
@@ -31,7 +30,7 @@ const Post = (props) => {
     } catch (error) {}
   }
   return (
-    <div className="overflow-auto h-full py-8">
+    <div className="overflow-auto h-full py-8 px-4">
       <div className="max-w-screen-md mx-auto">
         <div className="text-2xl font-bold mt-6 p-2 bg-stone-200 rounded-sm">
           Seo Title and meta description
@@ -47,9 +46,8 @@ const Post = (props) => {
         </div>
         <div className="flex flex-wrap pt-2 gap-1">
           {props.keywords.split(", ").map((keyword, idx) => (
-            <div key={idx} className="p-2 rounded-full bg-slate-800 text-white">
-              <FontAwesomeIcon icon={faHashtag} />
-              &nbsp;
+            <div key={idx} className="p-2 rounded-full bg-slate-800 text-white flex items-center gap-1 font-bold">
+              <FaSlackHash />
               {keyword}
             </div>
           ))}
@@ -65,27 +63,27 @@ const Post = (props) => {
           {!showDeleteConfirm && (
             <button
               onClick={() => setShowDeleteConfirm(true)}
-              className="btn bg-red-500 hover:bg-red-700"
+              className="btn btn-error w-full"
             >
               Delete Post
             </button>
           )}
           {showDeleteConfirm && (
-            <div>
-              <p className="p-2 bg-red-300 text-center">
+            <div className="flex flex-col gap-4">
+              <p className="p-2 bg-accent text-center">
                 Are you sure you want to delete this post? This action is
                 irreversible
               </p>
               <div className="grid grid-cols-2 gap-4">
                 <button
                   onClick={() => setShowDeleteConfirm(false)}
-                  className="btn bg-stone-500 hover:bg-stone-700"
+                  className="btn btn-outline"
                 >
                   cancel
                 </button>
                 <button
                   onClick={handleDeleteConfirm}
-                  className="btn bg-red-500 hover:bg-red-700"
+                  className="btn btn-error"
                 >
                   confirm delete
                 </button>

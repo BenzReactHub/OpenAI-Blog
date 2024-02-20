@@ -11,11 +11,13 @@ export default function TokenTopup() {
     window.location.href = result.session.url;
   }
   return (
-    <div className="max-w-screen-lg m-auto">
-      <h1>This is the token topup</h1>
-      <button className="btn" onClick={handleClick}>
-        Add Tokens
-      </button>
+    <div className="h-full p-4 lg:flex lg:flex-col lg:justify-center lg:items-center">
+      <div className="bg-neutral-content/80 rounded-md p-8 w-[80%] m-auto lg:w-[35rem]">
+        <h1 className="text-center text-xl lg:text-2xl">This is the token topup</h1>
+        <button className="btn btn-secondary w-full text-xl" onClick={handleClick}>
+          Add Tokens
+        </button>
+      </div>
     </div>
   );
 }
