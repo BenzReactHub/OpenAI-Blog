@@ -42,3 +42,11 @@ https://daisyui.com/docs/install/
 ```bash
 npm i -D daisyui@latest
 ```
+
+### React Icons
+https://www.npmjs.com/package/react-icons
+```bash
+yarn add react-icons
+# or
+npm install react-icons --save
+```
