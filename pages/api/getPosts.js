@@ -23,8 +23,6 @@ export default withApiAuthRequired(async function handler(req, res) {
       .limit(5)
       .sort({ created: -1 })
       .toArray();
-    
-      console.log(posts)
     res.status(200).json({ posts });
     return
   } catch (error) {}
