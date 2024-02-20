@@ -36,3 +36,9 @@ https://docs.stripe.com/stripe-cli
 ```bash
 npm i stripe
 ```
+
+### DaisyUI 
+https://daisyui.com/docs/install/
+```bash
+npm i -D daisyui@latest
+```
