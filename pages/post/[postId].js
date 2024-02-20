@@ -4,7 +4,7 @@ import clientPromise from "../../lib/mongodb";
 import { ObjectID } from "mongodb";
 
 const Post = (props) => {
-  console.log("Props", props);
+  // console.log("Props", props);
   return <div>Post</div>;
 };
 

@@ -66,7 +66,9 @@ export default withApiAuthRequired(async function handler(req, res) {
     userId: userProfile._id,
     created: new Date()
   })
+  console.log(post.insertedId)
   res
     .status(200)
-    .json({ post: JSON.parse(response.choices[0]?.message.content) });
+    // .json({ post: JSON.parse(response.choices[0]?.message.content) });
+    .json({ postId: post.insertedId });
 });

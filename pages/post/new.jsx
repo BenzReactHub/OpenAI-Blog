@@ -1,9 +1,9 @@
 import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { useState } from "react";
 import AppLayout from "../../components/AppLayout";
-
+import { useRouter } from "next/navigation";
 export default function NewPost(props) {
-  const [postContent, setPostContent] = useState("");
+  const router = useRouter();
   const [topic, setTopic] = useState("");
   const [keywords, setKeywords] = useState("");
 
@@ -14,8 +14,9 @@ export default function NewPost(props) {
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ topic, keywords }),
     }).then((res) => res.json());
-    // console.log("Post: ", response.post.postContent);
-    setPostContent(response.post.postContent);
+    if(response?.postId) {
+      router.push(`/post/${response.postId}`)
+    }
   }
   return (
     <div>
@@ -48,10 +49,6 @@ export default function NewPost(props) {
           Generate
         </button>
       </form>
-      <div
-        className="max-w-screen-sm p-10"
-        dangerouslySetInnerHTML={{ __html: postContent }}
-      />
     </div>
   );
 }
