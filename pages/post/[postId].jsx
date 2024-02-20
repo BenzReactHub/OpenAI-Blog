@@ -26,6 +26,7 @@ const Post = (props) => {
       if (response.success) {
         deletePost(props.id)
         router.push(`/post/new`);
+        router.refresh();
       }
     } catch (error) {}
   }

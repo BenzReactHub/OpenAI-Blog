@@ -22,6 +22,7 @@ export default function NewPost(props) {
       }).then((res) => res.json());
       if (response?.postId) {
         router.push(`/post/${response.postId}`);
+        router.refresh();
       }
     } catch (error) {
       setGenerating(false);
