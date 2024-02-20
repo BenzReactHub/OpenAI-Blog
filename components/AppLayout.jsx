@@ -38,6 +38,7 @@ const AppLayout = ({
         posts={posts}
         availableToken={availableToken}
         noMorePosts={noMorePosts}
+        getPosts={getPosts}
       />
       <NavBar />
       {children}
@@ -45,7 +46,7 @@ const AppLayout = ({
   );
 };
 
-const SideBar = ({ postId, user, posts, availableToken, noMorePosts }) => {
+const SideBar = ({ postId, user, posts, availableToken, noMorePosts, getPosts }) => {
   return (
     <div className="hidden lg:flex flex-col bg-gradient-b text-white overflow-hidden">
       <div className="px-2">
