@@ -47,7 +47,6 @@ export default withApiAuthRequired(async function handler(req, res) {
     max_tokens: 3000,
     temperature: 0,
   });
-  // console.log(response.choices[0]?.message.content);
   await db.collection("users").updateOne({
     auth0Id: user.sub,
   }, {
@@ -56,7 +55,6 @@ export default withApiAuthRequired(async function handler(req, res) {
     }
   });
   const parsed = JSON.parse(response.choices[0]?.message.content)
-  // console.log(parsed)
   const post = await db.collection('posts').insertOne({
     postContent: parsed?.postContent,
     postTitle: parsed?.title,
@@ -66,9 +64,7 @@ export default withApiAuthRequired(async function handler(req, res) {
     userId: userProfile._id,
     created: new Date()
   })
-  console.log(post.insertedId)
   res
     .status(200)
-    // .json({ post: JSON.parse(response.choices[0]?.message.content) });
     .json({ postId: post.insertedId });
 });

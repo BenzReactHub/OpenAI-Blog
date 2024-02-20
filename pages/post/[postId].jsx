@@ -4,6 +4,7 @@ import clientPromise from "../../lib/mongodb";
 import { ObjectID } from "mongodb";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHashtag } from "@fortawesome/free-solid-svg-icons";
+import { getAppProps } from "../../utils/getAppProps";
 
 const Post = (props) => {
   return (
@@ -24,7 +25,8 @@ const Post = (props) => {
         <div className="flex flex-wrap pt-2 gap-1">
           {props.keywords.split(", ").map((keyword, idx) => (
             <div key={idx} className="p-2 rounded-full bg-slate-800 text-white">
-              <FontAwesomeIcon icon={faHashtag} />&nbsp;
+              <FontAwesomeIcon icon={faHashtag} />
+              &nbsp;
               {keyword}
             </div>
           ))}
@@ -32,7 +34,10 @@ const Post = (props) => {
         <div className="text-2xl font-bold mt-6 p-2 bg-stone-200 rounded-sm">
           Blog post
         </div>
-        <div className="px-2" dangerouslySetInnerHTML={{ __html: props.postContent || "" }} />
+        <div
+          className="px-2"
+          dangerouslySetInnerHTML={{ __html: props.postContent || "" }}
+        />
       </div>
     </div>
   );
@@ -46,6 +51,7 @@ Post.getLayout = function getLayout(page, pageProps) {
 
 export const getServerSideProps = withPageAuthRequired({
   async getServerSideProps(ctx) {
+    const props = await getAppProps(ctx);
     const userSession = await getSession(ctx.req, ctx.res);
     const client = await clientPromise;
     const db = client.db("OpenAIBlog");
@@ -70,6 +76,7 @@ export const getServerSideProps = withPageAuthRequired({
         title: post.postTitle,
         metaDescription: post.metaDescription,
         keywords: post.keywords,
+        ...props,
       },
     };
   },
