@@ -6,6 +6,7 @@ import React from "react";
 import Logo from "./Logo";
 import { useContext, useEffect } from "react";
 import PostsContext from "../context/PostsContext";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const AppLayout = ({
   children,
@@ -116,12 +117,12 @@ const SideBar = ({ postId, user, posts, availableToken, noMorePosts, getPosts })
 
 const NavBar = () => {
   return (
-    <div className="lg:hidden h-[8rem] flex items-center justify-between px-8 bg-gradient-r">
+    <div className="lg:hidden h-[6rem] flex items-center justify-between px-8 bg-gradient-r">
       <Logo />
       <div className="">
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="text-xl">
-            DropDown Button
+            <GiHamburgerMenu className="text-3xl"/>
           </div>
           <ul
             tabIndex={0}

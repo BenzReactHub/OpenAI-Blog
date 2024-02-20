@@ -29,7 +29,7 @@ export default function NewPost(props) {
     }
   }
   return (
-    <div className="h-full overflow-hidden">
+    <div className="h-screen lg:h-auto overflow-hidden">
       {generating && (
         <div className="text-green-500 flex h-full animate-pulse w-full flex-col justify-center items-center">
           <FaPenNib className="text-3xl"/>

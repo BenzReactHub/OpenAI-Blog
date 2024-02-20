@@ -30,7 +30,7 @@ const Post = (props) => {
     } catch (error) {}
   }
   return (
-    <div className="overflow-auto h-full py-8">
+    <div className="overflow-auto h-full py-8 px-4">
       <div className="max-w-screen-md mx-auto">
         <div className="text-2xl font-bold mt-6 p-2 bg-stone-200 rounded-sm">
           Seo Title and meta description
