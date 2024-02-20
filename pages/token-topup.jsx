@@ -8,11 +8,10 @@ export default function TokenTopup() {
     const result = await fetch(`/api/addTokens`, {
       method: "POST",
     }).then((res) => res.json());
-    // console.log(result);
     window.location.href = result.session.url;
   }
   return (
-    <div>
+    <div className="max-w-screen-lg m-auto">
       <h1>This is the token topup</h1>
       <button className="btn" onClick={handleClick}>
         Add Tokens

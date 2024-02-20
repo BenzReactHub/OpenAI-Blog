@@ -1,12 +1,10 @@
 import { withPageAuthRequired } from "@auth0/nextjs-auth0";
-import React from "react";
 import AppLayout from "../components/AppLayout";
 import { getAppProps } from "../utils/getAppProps";
 
 export default function Success() {
-
   return (
-    <div>
+    <div className="max-w-screen-lg m-auto">
       <h1>Thank you for your purchase!</h1>
     </div>
   );
