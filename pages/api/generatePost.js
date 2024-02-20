@@ -24,6 +24,12 @@ export default withApiAuthRequired(async function handler(req, res) {
     res.status(422);
     return;
   }
+
+  if(topic.length > 80 || keywords.length > 80) {
+    res.status(422);
+    return
+  }
+
   const response = await openai.chat.completions.create({
     messages: [
       {
