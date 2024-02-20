@@ -6,6 +6,10 @@ export const PostsProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
   const [noMorePosts, setNoMorePosts] = useState(false);
 
+  const deletePost = useCallback((postId) => {
+    setPosts((prevPosts) => prevPosts.filter(post => post._id !== postId));
+  }, [setPosts]);
+
   const setPostsFromSSR = useCallback((postsFromSSR = []) => {
     setPosts((prevPosts) => {
       const existingPostIds = new Set(prevPosts.map((post) => post._id));
@@ -39,7 +43,7 @@ export const PostsProvider = ({ children }) => {
   }, []);
 
   return (
-    <PostsContext.Provider value={{ posts, setPostsFromSSR, getPosts, noMorePosts }}>
+    <PostsContext.Provider value={{ posts, setPostsFromSSR, getPosts, noMorePosts, deletePost }}>
       {children}
     </PostsContext.Provider>
   );

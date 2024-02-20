@@ -2,15 +2,17 @@ import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { faHashtag } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ObjectId } from "mongodb";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import AppLayout from "../../components/AppLayout";
 import clientPromise from "../../lib/mongodb";
 import { getAppProps } from "../../utils/getAppProps";
 import { useRouter } from "next/navigation";
+import PostsContext from "../../context/PostsContext";
 
 const Post = (props) => {
   const router = useRouter();
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const { deletePost } = useContext(PostsContext)
 
   async function handleDeleteConfirm() {
     try {
@@ -21,8 +23,8 @@ const Post = (props) => {
         },
         body: JSON.stringify({ postId: props.id }),
       }).then((res) => res.json());
-      console.log(response)
       if (response.success) {
+        deletePost(props.id)
         router.push(`/post/new`);
       }
     } catch (error) {}
