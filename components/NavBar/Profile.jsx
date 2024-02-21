@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { HiOutlineUser } from "react-icons/hi2";
-import { useNav } from "../../context/NavContext";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 const Profile = () => {
   return (
@@ -13,7 +13,7 @@ const Profile = () => {
 };
 
 const Mobile = () => {
-  const { user } = useNav();
+  const { user } = useUser();
   return (
     <div className="lg:hidden dropdown dropdown-end">
       <div tabIndex={0} role="button" className="text-xl">
@@ -40,7 +40,7 @@ const Mobile = () => {
   );
 };
 const Desktop = () => {
-  const { user } = useNav();
+  const { user } = useUser();
   return (
     <div className="hidden lg:flex items-center gap-2 border-t border-t-white h-36">
       {user ? (

@@ -7,9 +7,9 @@ import Profile from "./Profile";
 import Tokens from "./Tokens";
 import NavProvider from "../../context/NavContext";
 
-const Nav = ({ postId, user, availableToken }) => {
+const Nav = ({ postId, availableToken }) => {
   return (
-    <NavProvider user={user} postId={postId} availableToken={availableToken}>
+    <NavProvider postId={postId} availableToken={availableToken}>
       <Nav.Mobile />
       <Nav.Desktop />
     </NavProvider>
