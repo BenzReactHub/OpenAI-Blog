@@ -3,48 +3,49 @@ import { useNav } from "../../context/NavContext";
 import { usePosts } from "../../context/PostsContext";
 
 const Posts = () => {
+  const { postId } = useNav();
+  const mobileStyle =
+    "hover:bg-stone-200 hover:no-underline text-ellipsis overflow-x-hidden m-auto overflow-y-scroll w-[8rem] whitespace-nowrap block p-2 rounded-md";
+
+  const deskTopStyle =
+    "py-1 text-ellipsis overflow-hidden whitespace-nowrap block hover:bg-white/40 hover:no-underline p-2 rounded-md";
+
   return (
     <>
       <Posts.Mobile>
-        <Posts.Lists mode="mobile" />
-        <Posts.More/>
+        <Posts.Lists render={renderPostLink(postId, mobileStyle)} />
+        <Posts.More />
       </Posts.Mobile>
 
       <Posts.Desktop>
-        <Posts.Lists mode="desktop" />
-        <Posts.More/>
+        <Posts.Lists render={renderPostLink(postId, deskTopStyle)} />
+        <Posts.More />
       </Posts.Desktop>
     </>
   );
 };
 
-const Lists = ({ mode }) => {
-  const { postId } = useNav();
-  const { posts } = usePosts()
-  let baseStyle = "";
-  if (mode === "mobile")
-    baseStyle =
-      "hover:bg-stone-200 hover:no-underline text-ellipsis overflow-x-hidden m-auto overflow-y-scroll w-[8rem] whitespace-nowrap block p-2 rounded-md";
-  if (mode === "desktop")
-    baseStyle =
-      "py-1 text-ellipsis overflow-hidden whitespace-nowrap block hover:bg-white/40 hover:no-underline p-2 rounded-md";
-  return (
-    <>
-      {posts?.map((post) => (
-        <Link
-          key={post._id}
-          href={`/post/${post._id}`}
-          className={`${baseStyle} ${
-            post._id === postId
-              ? "bg-stone-200 lg:bg-white/40"
-              : "border-white/0"
-          }`}
-        >
-          {post.topic}
-        </Link>
-      ))}
-    </>
+const renderPostLink = (postId, style) => {
+  const RenderedPostLink = (post) => (
+    <Link
+      key={post?._id}
+      href={`/post/${post?._id}`}
+      className={`${style} ${
+        post?._id === postId ? "bg-stone-200 lg:bg-white/40" : "border-white/0"
+      }`}
+    >
+      {post?.topic}
+    </Link>
   );
+
+  RenderedPostLink.displayName = "RenderedPostLink";
+  return RenderedPostLink;
+};
+
+const Lists = ({ render }) => {
+  const { posts } = usePosts();
+  if (posts.length === 0) return <p>No data to show at the moment</p>;
+  return <>{posts.map(render)}</>;
 };
 
 const More = () => {
