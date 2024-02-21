@@ -1,11 +1,17 @@
 import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import AppLayout from "../components/AppLayout";
 import { getAppProps } from "../utils/getAppProps";
+import { IoCheckmarkCircleOutline } from "react-icons/io5";
 
 export default function Success() {
   return (
-    <div className="max-w-screen-lg m-auto">
-      <h1>Thank you for your purchase!</h1>
+    <div className="h-full lg:mt-36">
+      <div className="text-center w-[20rem] lg:w-[30rem] m-auto ">
+        <div role="alert" className="alert alert-success flex flex-col lg:flex-row items-center justify-center">
+          <IoCheckmarkCircleOutline className="text-4xl text-white"/>
+          <span className="text-xl lg:text-2xl font-bold text-white">Thank you for your purchase!</span>
+        </div>
+      </div>
     </div>
   );
 }
