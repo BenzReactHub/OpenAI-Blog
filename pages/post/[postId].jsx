@@ -1,17 +1,17 @@
 import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
-import { FaSlackHash } from "react-icons/fa";
 import { ObjectId } from "mongodb";
-import { useContext, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { FaSlackHash } from "react-icons/fa";
 import AppLayout from "../../components/AppLayout";
+import { usePosts } from "../../context/PostsContext";
 import clientPromise from "../../lib/mongodb";
 import { getAppProps } from "../../utils/getAppProps";
-import { useRouter } from "next/navigation";
-import PostsContext from "../../context/PostsContext";
 
 const Post = (props) => {
   const router = useRouter();
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  const { deletePost } = useContext(PostsContext)
+  const { deletePost } = usePosts();
 
   async function handleDeleteConfirm() {
     try {

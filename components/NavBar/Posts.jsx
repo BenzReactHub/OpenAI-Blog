@@ -1,30 +1,26 @@
 import Link from "next/link";
+import { useNav } from "../../context/NavContext";
+import { usePosts } from "../../context/PostsContext";
 
-const Posts = ({ posts, postId, getPosts, noMorePosts }) => {
+const Posts = () => {
   return (
     <>
       <Posts.Mobile>
-        <Posts.Lists posts={posts} postId={postId} mode="mobile" />
-        <Posts.More
-          posts={posts}
-          noMorePosts={noMorePosts}
-          getPosts={getPosts}
-        />
+        <Posts.Lists mode="mobile" />
+        <Posts.More/>
       </Posts.Mobile>
 
       <Posts.Desktop>
-        <Posts.Lists posts={posts} postId={postId} mode="desktop" />
-        <Posts.More
-          posts={posts}
-          noMorePosts={noMorePosts}
-          getPosts={getPosts}
-        />
+        <Posts.Lists mode="desktop" />
+        <Posts.More/>
       </Posts.Desktop>
     </>
   );
 };
 
-const Lists = ({ posts, postId, mode }) => {
+const Lists = ({ mode }) => {
+  const { postId } = useNav();
+  const { posts } = usePosts()
   let baseStyle = "";
   if (mode === "mobile")
     baseStyle =
@@ -51,7 +47,8 @@ const Lists = ({ posts, postId, mode }) => {
   );
 };
 
-const More = ({ posts, noMorePosts, getPosts }) => {
+const More = () => {
+  const { posts, noMorePosts, getPosts } = usePosts();
   return (
     <>
       {!noMorePosts && (

@@ -5,48 +5,18 @@ import Logo from "./Logo";
 import Posts from "./Posts";
 import Profile from "./Profile";
 import Tokens from "./Tokens";
+import NavProvider from "../../context/NavContext";
 
-// refactor context
-// postId
-// availableToken
-const Nav = ({
-  postId,
-  user,
-  posts,
-  availableToken,
-  noMorePosts,
-  getPosts,
-}) => {
+const Nav = ({ postId, user, availableToken }) => {
   return (
-    <>
-      <Nav.Mobile
-        postId={postId}
-        user={user}
-        posts={posts}
-        availableToken={availableToken}
-        noMorePosts={noMorePosts}
-        getPosts={getPosts}
-      />
-      <Nav.Desktop
-        postId={postId}
-        user={user}
-        posts={posts}
-        availableToken={availableToken}
-        noMorePosts={noMorePosts}
-        getPosts={getPosts}
-      />
-    </>
+    <NavProvider user={user} postId={postId} availableToken={availableToken}>
+      <Nav.Mobile />
+      <Nav.Desktop />
+    </NavProvider>
   );
 };
 
-const Mobile = ({
-  posts,
-  postId,
-  user,
-  availableToken,
-  noMorePosts,
-  getPosts,
-}) => {
+const Mobile = () => {
   return (
     <div className="lg:hidden h-[6rem] flex items-center justify-between px-8 bg-gradient-r">
       <Logo />
@@ -55,19 +25,14 @@ const Mobile = ({
           <div tabIndex={0} role="button" className="text-xl">
             <PiArticleMediumBold className="text-3xl" />
           </div>
-          <Posts
-            posts={posts}
-            postId={postId}
-            getPosts={getPosts}
-            noMorePosts={noMorePosts}
-          />
+          <Posts />
         </div>
         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
           <div className="indicator">
-            <Tokens availableToken={availableToken} />
+            <Tokens />
           </div>
         </div>
-        <Profile user={user} />
+        <Profile />
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="text-xl">
             <GiHamburgerMenu className="text-3xl" />
@@ -96,14 +61,7 @@ const Mobile = ({
   );
 };
 
-const Desktop = ({
-  postId,
-  user,
-  posts,
-  availableToken,
-  noMorePosts,
-  getPosts,
-}) => {
+const Desktop = () => {
   return (
     <div className="hidden lg:flex flex-col bg-gradient-b text-white overflow-hidden px-4">
       <div>
@@ -114,15 +72,10 @@ const Desktop = ({
         >
           New Post
         </Link>
-        <Tokens availableToken={availableToken} />
+        <Tokens />
       </div>
-      <Posts
-        posts={posts}
-        postId={postId}
-        getPosts={getPosts}
-        noMorePosts={noMorePosts}
-      />
-      <Profile user={user} />
+      <Posts />
+      <Profile />
     </div>
   );
 };

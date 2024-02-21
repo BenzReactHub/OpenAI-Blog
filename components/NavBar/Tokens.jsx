@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { PiCoinsFill } from "react-icons/pi";
+import { useNav } from "../../context/NavContext";
 
-const Tokens = ({ availableToken }) => {
+const Tokens = () => {
+  const { availableToken } = useNav();
   return (
     <>
       <Tokens.Mobile>
@@ -12,7 +14,9 @@ const Tokens = ({ availableToken }) => {
       </Tokens.Mobile>
       <Tokens.Desktop>
         <PiCoinsFill className="text-yellow-500 text-2xl" />
-        <span className="pl-1">{availableToken > 100 ? "99+" : availableToken} tokens available</span>
+        <span className="pl-1">
+          {availableToken > 100 ? "99+" : availableToken} tokens available
+        </span>
       </Tokens.Desktop>
     </>
   );
