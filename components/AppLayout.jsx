@@ -1,4 +1,3 @@
-import { useUser } from "@auth0/nextjs-auth0/client";
 import { useEffect } from "react";
 import { usePosts } from "../context/PostsContext";
 import Nav from "./NavBar/Nav";
@@ -10,7 +9,6 @@ const AppLayout = ({
   postCreated,
   postId,
 }) => {
-  const { user } = useUser();
 
   const { setPostsFromSSR, posts, getPosts, noMorePosts } = usePosts();
 
@@ -29,7 +27,6 @@ const AppLayout = ({
       <Nav
         postId={postId}
         availableToken={availableToken}
-        user={user}
         posts={posts}
         noMorePosts={noMorePosts}
         getPosts={getPosts}
