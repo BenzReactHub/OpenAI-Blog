@@ -1,12 +1,27 @@
-import { createContext, useCallback, useReducer, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useReducer,
+  useState,
+} from "react";
 
 const PostsContext = createContext({});
+
+export function usePosts() {
+  const context = useContext(PostsContext);
+  if (context === undefined)
+    throw new Error("PostsContext was used outside of the PostsProvider!");
+  return context;
+}
 
 function postsReducer(state, action) {
   switch (action.type) {
     case "addPost":
       const existingPostIds = new Set(state.map((post) => post._id));
-      const newPosts = action.posts.filter((post) => !existingPostIds.has(post._id))
+      const newPosts = action.posts.filter(
+        (post) => !existingPostIds.has(post._id)
+      );
       return [...state, ...newPosts];
 
     case "deletePost":
@@ -55,4 +70,4 @@ export const PostsProvider = ({ children }) => {
   );
 };
 
-export default PostsContext;
+export default PostsProvider;

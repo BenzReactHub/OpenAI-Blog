@@ -1,6 +1,6 @@
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { useContext, useEffect } from "react";
-import PostsContext from "../context/PostsContext";
+import { useEffect } from "react";
+import { usePosts } from "../context/PostsContext";
 import Nav from "./NavBar/Nav";
 
 const AppLayout = ({
@@ -12,8 +12,7 @@ const AppLayout = ({
 }) => {
   const { user } = useUser();
 
-  const { setPostsFromSSR, posts, getPosts, noMorePosts } =
-    useContext(PostsContext);
+  const { setPostsFromSSR, posts, getPosts, noMorePosts } = usePosts();
 
   useEffect(() => {
     setPostsFromSSR(postsFromSSR);

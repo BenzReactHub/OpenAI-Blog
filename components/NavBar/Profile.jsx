@@ -1,17 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { HiOutlineUser } from "react-icons/hi2";
+import { useNav } from "../../context/NavContext";
 
-const Profile = ({ user }) => {
+const Profile = () => {
   return (
     <>
-      <Profile.Mobile user={user}/>
-      <Profile.Desktop user={user}/>
+      <Profile.Mobile />
+      <Profile.Desktop />
     </>
   );
 };
 
-const Mobile = ({ user }) => {
+const Mobile = () => {
+  const { user } = useNav();
   return (
     <div className="lg:hidden dropdown dropdown-end">
       <div tabIndex={0} role="button" className="text-xl">
@@ -37,7 +39,8 @@ const Mobile = ({ user }) => {
     </div>
   );
 };
-const Desktop = ({ user }) => {
+const Desktop = () => {
+  const { user } = useNav();
   return (
     <div className="hidden lg:flex items-center gap-2 border-t border-t-white h-36">
       {user ? (
