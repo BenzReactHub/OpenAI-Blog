@@ -1,14 +1,13 @@
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { PiCoinsFill } from "react-icons/pi";
 import Image from "next/image";
 import Link from "next/link";
-import React, { createContext } from "react";
-import Logo from "./Logo";
 import { useContext, useEffect } from "react";
-import PostsContext from "../context/PostsContext";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { HiOutlineUser } from "react-icons/hi2";
 import { PiArticleMediumBold } from "react-icons/pi";
+import PostsContext from "../context/PostsContext";
+import Logo from "./Logo";
+import Tokens from "./Tokens";
 
 const AppLayout = ({
   children,
@@ -73,13 +72,7 @@ const SideBar = ({
         >
           New Post
         </Link>
-        <Link
-          href="/token-topup"
-          className="flex my-2 items-center justify-center gap-2 mt-2 text-center"
-        >
-          <PiCoinsFill className="text-yellow-500 text-2xl" />
-          <span className="pl-1">{availableToken} tokens available</span>
-        </Link>
+        <Tokens availableToken={availableToken} />
       </div>
       <div className="px-4 flex-1 flex flex-col gap-1 overflow-auto">
         {posts.map((post) => (
@@ -179,20 +172,7 @@ const NavBar = ({
         </div>
         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
           <div className="indicator">
-            <Link href="/token-topup">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost btn-circle"
-              >
-                <div className="indicator">
-                  <PiCoinsFill className="text-yellow-500 text-2xl" />
-                  <span className="badge badge-sm indicator-item">
-                    {availableToken > 100 ? "99+" : availableToken}
-                  </span>
-                </div>
-              </div>
-            </Link>
+            <Tokens availableToken={availableToken} />
           </div>
         </div>
         <div className="dropdown dropdown-end">
