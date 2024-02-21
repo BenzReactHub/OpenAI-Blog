@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Logo from "../components/Logo";
+import Logo from "../components/NavBar/Logo";
 
 export default function Home() {
   return (
@@ -13,7 +13,10 @@ export default function Home() {
           topics, blending technology and creativity seamlessly. Explore the
           possibilities today!
         </p>
-        <Link className="btn btn-secondary w-full hover:no-underline text-xl" href="/post/new">
+        <Link
+          className="btn btn-secondary w-full hover:no-underline text-xl"
+          href="/post/new"
+        >
           Login
         </Link>
       </div>
