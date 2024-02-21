@@ -34,7 +34,7 @@ const Lists = ({ posts, postId, mode }) => {
       "py-1 text-ellipsis overflow-hidden whitespace-nowrap block hover:bg-white/40 hover:no-underline p-2 rounded-md";
   return (
     <>
-      {posts.map((post) => (
+      {posts?.map((post) => (
         <Link
           key={post._id}
           href={`/post/${post._id}`}
